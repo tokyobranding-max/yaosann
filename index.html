@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>現場が動かない理由診断 Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="gap-app">
+        <section class="tool-stage" aria-label="現場が動かない理由診断">
+            <aside class="map-rail">
+                <header class="brand-row">
+                    <div class="brand-mark" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div>
+                        <p>Organization Gap Map</p>
+                        <strong>現場が動かない理由診断</strong>
+                    </div>
+                </header>
+
+                <div class="rail-copy">
+                    <p class="eyebrow">Door Knock Diagnosis</p>
+                    <h1>組織の詰まりを、責めずに見つける。</h1>
+                    <p>
+                        指示、会議、属人化、管理職の疲れ。
+                        責任者の違和感を18問で整理し、最初に確認する場所をMAPで返します。
+                    </p>
+                </div>
+
+                <div class="map-preview" aria-label="組織ズレMAPのプレビュー">
+                    <div class="preview-title">組織ズレMAP</div>
+                    <div class="preview-layout">
+                        <ul>
+                            <li>方針伝達</li>
+                            <li>本音表出</li>
+                            <li>管理職摩耗</li>
+                        </ul>
+                        <div class="preview-core" aria-hidden="true">
+                            <span>経営</span>
+                            <span>管理職</span>
+                            <span>現場</span>
+                        </div>
+                        <ul>
+                            <li>役割明確</li>
+                            <li>会議実行</li>
+                            <li>属人化負荷</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rail-metrics">
+                    <article>
+                        <strong>18</strong>
+                        <span>questions</span>
+                    </article>
+                    <article>
+                        <strong>6</strong>
+                        <span>map areas</span>
+                    </article>
+                    <article>
+                        <strong>5-8</strong>
+                        <span>minutes</span>
+                    </article>
+                </div>
+            </aside>
+
+            <section class="diagnosis-workbench">
+                <header class="workbench-head">
+                    <div>
+                        <p class="eyebrow" id="phaseEyebrow">Start</p>
+                        <h2 id="phaseTitle">責任者視点のセルフチェック</h2>
+                    </div>
+                    <div class="progress-shell" aria-label="診断進捗">
+                        <span id="progressLabel">0 / 18</span>
+                        <div class="progress-track" aria-hidden="true">
+                            <i id="progressBar"></i>
+                        </div>
+                    </div>
+                </header>
+
+                <section class="screen active" id="welcomeScreen" data-screen="welcome">
+                    <div class="welcome-copy">
+                        <div class="notice-strip">
+                            <span>無料</span>
+                            <span>責任者向け</span>
+                            <span>匿名で開始可</span>
+                        </div>
+                        <h3>現場が動かない理由を、まず1枚の地図に。</h3>
+                        <p>
+                            このプロトタイプは、責任者の見えている違和感を整理する入口です。
+                            結果では、詰まりタイプ、重点領域、現場に聞きたい最初の問いを表示します。
+                        </p>
+                    </div>
+
+                    <div class="start-panel">
+                        <div class="start-steps">
+                            <article>
+                                <span>01</span>
+                                <strong>組織情報</strong>
+                                <p>立場と規模を選ぶ</p>
+                            </article>
+                            <article>
+                                <span>02</span>
+                                <strong>18問診断</strong>
+                                <p>最近3か月で答える</p>
+                            </article>
+                            <article>
+                                <span>03</span>
+                                <strong>MAP結果</strong>
+                                <p>最初の一手を読む</p>
+                            </article>
+                        </div>
+                        <button class="primary-button" id="beginButton" type="button">診断をはじめる</button>
+                    </div>
+                </section>
+
+                <section class="screen" id="profileScreen" data-screen="profile">
+                    <form class="profile-form" id="profileForm">
+                        <fieldset>
+                            <legend>あなたの立場</legend>
+                            <div class="choice-grid" data-choice-group="role">
+                                <button type="button" data-value="経営者">経営者</button>
+                                <button type="button" data-value="院長">院長</button>
+                                <button type="button" data-value="店長">店長</button>
+                                <button type="button" data-value="拠点長">拠点長</button>
+                                <button type="button" data-value="管理職">管理職</button>
+                                <button type="button" data-value="オーナー">オーナー</button>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>対象組織</legend>
+                            <div class="field-pair">
+                                <label>
+                                    <span>業種</span>
+                                    <select id="industrySelect">
+                                        <option>クリニック</option>
+                                        <option>医療周辺</option>
+                                        <option selected>店舗 / サービス</option>
+                                        <option>営業拠点</option>
+                                        <option>小売</option>
+                                        <option>その他</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    <span>人数</span>
+                                    <select id="sizeSelect">
+                                        <option>1-9人</option>
+                                        <option selected>10-30人</option>
+                                        <option>31-50人</option>
+                                        <option>51人以上</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>今、最も近い悩み</legend>
+                            <div class="pain-list" data-choice-group="pain">
+                                <button type="button" data-value="現場が動かない">指示しているのに現場が動かない</button>
+                                <button type="button" data-value="会議が進まない">会議しても実行に移らない</button>
+                                <button type="button" data-value="属人化">できる人に仕事が偏っている</button>
+                                <button type="button" data-value="管理職疲弊">管理職やリーダーが疲れている</button>
+                                <button type="button" data-value="本音が見えない">現場の本音が見えにくい</button>
+                                <button type="button" data-value="方針不安">方針が伝わっているか不安</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="screen-actions">
+                        <button class="ghost-button" id="profileBackButton" type="button">戻る</button>
+                        <button class="primary-button" id="questionStartButton" type="button">18問へ進む</button>
+                    </div>
+                </section>
+
+                <section class="screen" id="questionScreen" data-screen="questions">
+                    <div class="question-grid">
+                        <aside class="domain-mini-map" aria-label="診断領域の進捗">
+                            <p>6領域MAP</p>
+                            <div id="domainDots"></div>
+                        </aside>
+
+                        <article class="question-card">
+                            <div class="domain-badge" id="domainBadge">方針伝達</div>
+                            <p class="question-count" id="questionCount">Question 1</p>
+                            <h3 id="questionText"></h3>
+                            <p class="question-hint">最近3か月の状態で、最も近いものを選んでください。</p>
+                            <div class="scale-buttons" id="scaleButtons" role="group" aria-label="5段階回答"></div>
+                        </article>
+                    </div>
+
+                    <div class="screen-actions">
+                        <button class="ghost-button" id="questionBackButton" type="button">前の質問</button>
+                        <button class="primary-button" id="questionNextButton" type="button">次へ</button>
+                    </div>
+                </section>
+
+                <section class="screen" id="resultScreen" data-screen="result" aria-live="polite">
+                    <div class="result-hero">
+                        <div>
+                            <p class="eyebrow">Diagnosis Result</p>
+                            <h3 id="resultType">診断タイプ</h3>
+                            <p id="resultSummary"></p>
+                        </div>
+                        <div class="score-stamp">
+                            <span>整理度</span>
+                            <strong id="totalScore">--</strong>
+                            <em id="scoreState"></em>
+                        </div>
+                    </div>
+
+                    <div class="result-layout">
+                        <section class="gap-map-card" aria-label="組織ズレMAP">
+                            <header>
+                                <div>
+                                    <p>Organization Gap Map</p>
+                                    <h4>組織ズレMAP</h4>
+                                </div>
+                                <div class="map-legend">
+                                    <span>活かせる</span>
+                                    <span>まず確認</span>
+                                    <span>重点</span>
+                                </div>
+                            </header>
+
+                            <div class="gap-map" id="gapMap">
+                                <svg viewBox="0 0 760 540" aria-hidden="true">
+                                    <path d="M183 112 H274 L332 174"></path>
+                                    <path d="M168 252 H273 L332 252"></path>
+                                    <path d="M184 406 H272 L330 344"></path>
+                                    <path d="M578 112 H487 L430 174"></path>
+                                    <path d="M592 252 H488 L430 252"></path>
+                                    <path d="M578 406 H487 L430 344"></path>
+                                </svg>
+                                <div class="map-label left top" data-domain-button="direction"></div>
+                                <div class="map-label left middle" data-domain-button="voice"></div>
+                                <div class="map-label left bottom" data-domain-button="manager"></div>
+                                <div class="org-core">
+                                    <span>経営 / 本社<small>方針と優先順位</small></span>
+                                    <span>管理職<small>翻訳と調整</small></span>
+                                    <span>現場<small>実行と接点</small></span>
+                                    <i class="flow flow-one">会議</i>
+                                    <i class="flow flow-two">業務</i>
+                                </div>
+                                <div class="map-label right top" data-domain-button="role"></div>
+                                <div class="map-label right middle" data-domain-button="meeting"></div>
+                                <div class="map-label right bottom" data-domain-button="dependency"></div>
+                            </div>
+                        </section>
+
+                        <aside class="domain-detail" id="domainDetail">
+                            <p class="detail-kicker" id="detailState"></p>
+                            <h4 id="detailTitle"></h4>
+                            <p id="detailDescription"></p>
+                            <section>
+                                <span>起きやすいこと</span>
+                                <p id="detailRisk"></p>
+                            </section>
+                            <section>
+                                <span>最初に聞きたい問い</span>
+                                <p id="detailQuestion"></p>
+                            </section>
+                            <section>
+                                <span>初動</span>
+                                <p id="detailAction"></p>
+                            </section>
+                        </aside>
+                    </div>
+
+                    <div class="result-bottom">
+                        <section class="bar-panel">
+                            <header>
+                                <h4>6領域の傾向</h4>
+                                <p>低い領域ほど、現場を含めて確認したい場所です。</p>
+                            </header>
+                            <div id="scoreBars"></div>
+                        </section>
+
+                        <section class="next-step-panel">
+                            <p class="eyebrow">Next Step</p>
+                            <h4>責任者視点のMAPから、現場実態のカルテへ。</h4>
+                            <p>
+                                このセルフ診断で見えたのは入口です。
+                                4週間診断では、現場ヒアリング、会議観察、業務の流れを重ねてズレの発生地点を整理します。
+                            </p>
+                            <div class="deliverables">
+                                <span>組織ズレMAP</span>
+                                <span>業務ジャーニー</span>
+                                <span>30日アクション</span>
+                            </div>
+                            <div class="cta-row">
+                                <button class="primary-button" type="button">30分レビューを相談</button>
+                                <button class="ghost-button" id="restartButton" type="button">もう一度診断</button>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
